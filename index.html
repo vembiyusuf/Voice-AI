@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Suara untuk Teks Input</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            max-width: 400px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Suara</h1>
+        <input type="text" id="textInput" placeholder="Tulis teks yang ingin dibaca...">
+        <button onclick="readText()">Baca Teks</button>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script>
+        // Fungsi untuk membaca teks dengan suara AI
+        function readText() {
+            const text = document.getElementById("textInput").value;
+
+            if (text.trim() === "") {
+                document.getElementById("responseMessage").textContent = "Silakan masukkan teks terlebih dahulu.";
+                return;
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'id-ID'; // Bahasa Indonesia
+            utterance.rate = 1; // Kecepatan suara
+            speechSynthesis.speak(utterance);
+
+            // Tampilkan pesan bahwa AI sedang membaca teks
+            document.getElementById("responseMessage").textContent = "AI sedang membaca teks: \"" + text + "\"";
+        }
+    </script>
+</body>
+</html>
